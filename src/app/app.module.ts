@@ -4,15 +4,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainViewComponent } from './components/main-view/main-view.component';
+import { AudioComponent } from './components/audio/audio.component';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainViewComponent,
+    AudioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule, MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

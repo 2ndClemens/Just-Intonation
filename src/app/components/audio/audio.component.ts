@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-audio',
   templateUrl: './audio.component.html',
-  styleUrls: ['./audio.component.scss'],
+  styleUrls: ['./audio.component.scss']
 })
 export class AudioComponent implements OnInit {
   // baseFrequency = 1046.5;
-  baseFrequency = 880;
+  baseFrequency = 220;
 
   firstTone = true;
 
@@ -26,7 +26,7 @@ export class AudioComponent implements OnInit {
     { name: 'C', frequency: 261.6 },
     { name: 'C#', frequency: 277.2 },
     { name: 'D', frequency: 293.7 },
-    { name: 'D#', frequency: 311.1},
+    { name: 'D#', frequency: 311.1 },
     { name: 'E', frequency: 329.6 },
     { name: 'F', frequency: 349.2 },
     { name: 'F#', frequency: 370 },
@@ -34,7 +34,7 @@ export class AudioComponent implements OnInit {
     { name: 'G#', frequency: 415.3 },
     { name: 'A', frequency: 440 },
     { name: 'A#', frequency: 466.2 },
-    { name: 'B', frequency: 493.9 },
+    { name: 'B', frequency: 493.9 }
   ];
 
   constructor() {}
@@ -45,10 +45,10 @@ export class AudioComponent implements OnInit {
     this.distort(0);
     this.masterGainNode.connect(this.masterDistNode);
     this.masterGainNode.gain.value = 1;
-    for (let m = 2; m < 17; m++) {
+    for (let m = 2; m < 10; m++) {
       for (let n = 1; n < 100; n++) {
         const frequency = (this.baseFrequency / m) * n;
-        if (frequency <= this.baseFrequency * 4) {
+        if (frequency <= this.baseFrequency * 8) {
           this.oscillatorNodes.push(this.audioCtx.createOscillator());
           this.gainNodes.push(this.audioCtx.createGain());
           this.distNodes.push(this.audioCtx.createWaveShaper());
@@ -59,7 +59,7 @@ export class AudioComponent implements OnInit {
             index: this.notes.length,
             name: n + '/' + m,
             row: m,
-            col: n,
+            col: n
           });
         }
       }
@@ -111,7 +111,7 @@ export class AudioComponent implements OnInit {
       this.oscillatorNodes[n].type = 'sine';
 
       this.gainNodes[n].gain.value = 0.2;
-      this.oscillatorNodes[n].frequency.value = this.notes[n].frequency;
+      this.oscillatorNodes[n].frequency.value = this.notes[n].frequency / 2;
     }
 
     // Ausgabe starten
@@ -152,7 +152,7 @@ export class AudioComponent implements OnInit {
   transpose() {
     for (let n = 0; n < this.gainNodes.length; n++) {
       this.notes[n].frequency = this.oscillatorNodes[n].frequency.value =
-        (this.baseFrequency / this.notes[n].row) * this.notes[n].col;
+        ((this.baseFrequency / this.notes[n].row) * this.notes[n].col) / 2;
     }
   }
 

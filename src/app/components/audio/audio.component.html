@@ -1,76 +1,44 @@
-<button
-  *ngFor="let note of notes; let i = index"
-  class="note"
-  (click)="beep(i)"
-  [ngStyle]="
-    !note.playing
-      ? {
-          'background-color': '#000',
-          color: '#fff',
-          left: note.frequency / 2 + 'px',
-          top: note.row * 30 + 100 + 'px'
-        }
-      : {
-          'background-color': '#fff',
-          color: '#000',
-          left: note.frequency / 2 + 'px',
-          top: note.row * 30+ 100 + 'px'
-        }
-  "
->
-  {{ note.name }}
-</button>
+<div style="width: 100%; height:600px; overflow-y: scroll;">
+  <div style="width: 4000px; height: 600px; position:relative;">
+    <button
+      *ngFor="let note of notes; let i = index"
+      class="note"
+      (click)="beep(i)"
+      [ngStyle]="
+        !note.playing
+          ? {
+              'background-color': '#000',
+              color: '#fff',
+              left: note.frequency / .5 + 'px',
+              top: note.row * 30 + 15 + 'px'
+            }
+          : {
+              'background-color': '#fff',
+              color: '#000',
+              left: note.frequency / .5 + 'px',
+              top: note.row * 30 + 15 + 'px'
+            }
+      "
+    >
+      {{ note.name }}
+    </button>
+  </div>
+</div>
 <button (click)="silence()">silence</button>
 <button (click)="distort(50)">distort 50</button>
 <button (click)="distort(5)">distort 5</button>
 <button (click)="distort(0)">distort 0</button>
+
+<br>
 <button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
   (click)="
+    setFrequency(equalNote.frequency );
     playChord([
-      '1/12',
-      '1/6',
       '1/4',
-      '1/2',
-      '2/2',
-      '1/3',
-      '4/3',
-      '7/4',
-      '6/3',
-      '8/3',
-      '14/4',
-      '12/3'
-    ])
-  "
->
-  Chord
-</button>
-<button
-  (click)="
-    playChord([
-      '1/12',
-      '1/6',
-      '1/4',
-      '1/2',
-      '2/2',
-      '1/3',
-      '4/3',
-      '5/3',
-      '6/3',
-      '8/3',
-      '10/3',
-      '12/3'
-    ])
-  "
->
-  Chord
-</button>
-<button
-  (click)="
-    playChord([
-      '1/16',
-      '1/8',
-      '1/4',
-      '1/2',
+      '2/4',
       '3/4',
       '4/4',
       '5/4',
@@ -78,19 +46,25 @@
       '8/4',
       '10/4',
       '12/4',
-      '16/4'
+      '16/4',
+      '20/4',
+      '24/4',
+      '32/4'
     ])
   "
 >
-  Chord
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
+<br />
 <button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
   (click)="
+    setFrequency(equalNote.frequency );
     playChord([
-      '1/16',
-      '1/8',
       '1/4',
-      '1/2',
+      '2/4',
       '3/4',
       '4/4',
       '6/5',
@@ -98,17 +72,104 @@
       '8/4',
       '12/5',
       '12/4',
+      '16/4',
+      '24/5',
+      '24/4',
+      '32/4'
+    ])
+  "
+>
+  {{ equalNote.name }}{{ equalNote.frequency }}
+</button>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
+  (click)="
+    setFrequency(equalNote.frequency );
+    playChord([
+      '1/4',
+      '2/4',
+      '5/5',
+      '6/5',
+      '7/5',
+      '10/5',
+      '12/5',
+      '14/5',
+      '17/5',
+      '20/5',
+      '24/5',
+      '28/5',
+      '34/5',
+      '40/5'
+    ])
+  "
+>
+  {{ equalNote.name }}{{ equalNote.frequency }}</button
+><br />
+<button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
+  (click)="
+    setFrequency(equalNote.frequency );
+    playChord([
+      '1/4',
+      '2/4',
+      '3/4',
+      '4/4',
+      '5/4',
+      '6/4',
+      '7/4',
+      '8/4',
+      '10/4',
+      '12/4',
+      '14/4',
+      '16/4',
+      '20/4',
+      '24/4',
+      '28/4',
+      '32/4'
+    ])
+  "
+>
+  {{ equalNote.name }}{{ equalNote.frequency }}
+</button>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
+  (click)="
+    setFrequency(equalNote.frequency );
+    playChord([
+      '1/4',
+      '2/4',
+      '3/4',
+      '5/6',
+      '4/4',
+      '5/4',
+      '6/4',
+      '5/3',
+      '8/4',
+      '10/4',
+      '12/4',
+      '10/3',
       '16/4'
     ])
   "
 >
-  Chord
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
+<br />
 <button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
   (click)="
+    setFrequency(equalNote.frequency );
     playChord([
-      '1/15',
-      '1/10',
       '1/5',
       '2/5',
       '3/5',
@@ -119,104 +180,138 @@
       '10/5',
       '12/5',
       '16/5',
-      '20/5'
+      '20/5',
+      '24/5',
+      '32/5',
+      '40/5'
     ])
   "
 >
-  Chord
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
+<br />
 <button
-  (click)="
-    playChord([
-      '1/12',
-      '3/12',
-      '1/6',
-      '2/6',
-      '4/5',
-      '3/6',
-      '4/6',
-      '4/6',
-      '6/6',
-      '8/6',
-      '10/6',
-      '12/6'
-    ])
-  "
->
-  Chord
-</button>
-<button
-  (click)="
-    playChord(['1/14', '1/7', '2/7', '4/7', '7/7', '9/7', '11/7', '14/7'])
-  "
->
-  Chord
-</button>
-
-<button
-  (click)="
-    playChord(['1/8', '2/8', '4/8', '8/8', '6/5', '7/5', '16/8', '12/5', '14/5', '32/8'])
-  "
->
-  vermindert
-</button>
-
-<button (click)="setFrequency(880)">A (880)</button>
-<button (click)="setFrequency(523.3)">C (523.3)</button>
-<br>
-<button mat-raised-button color="primary"
+  mat-raised-button
+  color="primary"
   *ngFor="let equalNote of equalNotes"
   (click)="
-    setFrequency(equalNote.frequency * 2);
+    setFrequency(equalNote.frequency );
     playChord([
-      '1/16',
-      '1/8',
-      '1/4',
-      '2/4',
-      '3/4',
-      '4/4',
-      '5/4',
-      '6/4',
-      '8/4',
-      '10/4',
-      '12/4',
-      '16/4'
+      '1/3',
+      '2/3',
+      '3/3',
+      '4/3',
+      '5/3',
+      '6/3',
+      '8/3',
+      '10/3',
+      '12/3',
+      '16/3',
+      '20/3',
+      '24/3'
     ])
   "
 >
-  {{ equalNote.name }}{{ equalNote.frequency * 2 }}
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
-<br>
-<button mat-raised-button color="primary"
+<br />
+<button
+  mat-raised-button
+  color="primary"
   *ngFor="let equalNote of equalNotes"
   (click)="
-    setFrequency(equalNote.frequency * 2);
+    setFrequency(equalNote.frequency );
     playChord([
-      '1/16',
-      '1/8',
-      '1/4',
-      '2/4',
-      '3/5',
-      '3/4',
-      '4/4',
-      '6/5',
-      '6/4',
-      '8/4',
-      '12/5',
-      '12/4',
-      '16/4'
+      '1/2',
+      '2/2',
+      '3/2',
+      '4/2',
+      '5/2',
+      '6/2',
+      '8/2',
+      '10/2',
+      '12/2',
+      '16/2'
     ])
   "
 >
-  {{ equalNote.name }}{{ equalNote.frequency * 2 }}
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
-<br>
-<button mat-raised-button color="primary"
+<br />
+<button
+  mat-raised-button
+  color="primary"
   *ngFor="let equalNote of equalNotes"
   (click)="
-    setFrequency(equalNote.frequency * 2);
-    playChord(['1/16', '1/8', '2/8', '4/8', '7/10', '5/5', '6/5', '7/5', '10/5', '12/5', '14/5', '20/5'])
+    setFrequency(equalNote.frequency );
+    playChord([
+      '1/7',
+      '3/7',
+      '4/7',
+      '7/7',
+      '9/7',
+      '11/7',
+      '14/7',
+      '18/7',
+      '22/7',
+      '28/7',
+      '36/7',
+      '44/7',
+      '56/7'
+    ])
   "
 >
-  {{ equalNote.name }}{{ equalNote.frequency * 2 }}
+  {{ equalNote.name }}{{ equalNote.frequency }}
+</button>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
+  (click)="
+    setFrequency(equalNote.frequency );
+    playChord([
+    '3/9',
+    '4/9',
+      '7/9',
+      '9/9',
+      '11/9',
+      '14/9',
+      '18/9',
+      '22/9',
+      '28/9',
+      '36/9',
+      '44/9',
+      '56/9',
+      '72/9'
+    ])
+  "
+>
+  {{ equalNote.name }}{{ equalNote.frequency }}
+</button>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  *ngFor="let equalNote of equalNotes"
+  (click)="
+    setFrequency(equalNote.frequency );
+    playChord([
+    '3/9',
+    '4/9',
+      '7/9',
+      '9/9',
+      '11/9',
+      '14/9',
+      '17/9',
+      '22/9',
+      '28/9',
+      '34/9',
+      '44/9',
+      '56/9',
+      '68/9'
+    ])
+  "
+>
+  {{ equalNote.name }}{{ equalNote.frequency }}
 </button>
